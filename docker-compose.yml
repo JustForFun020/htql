@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  next-ui:
+    # depends_on:
+    #   - backend
+    build: 
+      context: ./next-ui
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    develop:
+      watch:
+        - path: ./next-ui/package.json
+          action: rebuild
+        - path: ./next-ui/package-lock.json
+          action: rebuild
+        - path: ./next-ui/next.config.mjs
+          action: rebuild
+        - path: ./next-ui
+          target: /app
+          action: sync
+        - path: ./next-ui/.env.dev
+          target: /app/.env.dev
+          action: sync
+  
+  # mysql-db:
+  #   image: mysql@latest
+  #   volumes:
+  #     - code://data/mysql
+  #   ports:
+  #     - 3308:3306
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: htql
+  #   restart: always
+  
+  # backend:
+  #   depends_on:
+  #     - mysql-db
+  #   build: 
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8080:8080
+  #   develop:
+  #     watch:
+  #       - path: ./backend
+    
+
+
+volumes:
+  code:
