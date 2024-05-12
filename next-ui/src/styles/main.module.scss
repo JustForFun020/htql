@@ -1,0 +1,13 @@
+@import 'abstract/main.module';
+
+@import 'layout/main.module';
+
+@import 'pages/main.module';
+
+.body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    @include scrollbar();
+}
