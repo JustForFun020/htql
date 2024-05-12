@@ -1,13 +1,20 @@
+'use client';
+
 import React from 'react';
 import { Image } from 'antd';
 import style from '@/styles/main.module.scss';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 
 const Welcome = () => {
+  const router = useRouter();
+
   return (
     <div className={clsx(style.welcome__provider)}>
       <div className={clsx(style.primary)}>
-        <button className={clsx(style.login__btn)}>Login</button>
+        <button className={clsx(style.login__btn)} onClick={() => router.push('/login')}>
+          Login
+        </button>
       </div>
       <div className={clsx(style.second)}>
         <Image
@@ -24,7 +31,9 @@ const Welcome = () => {
               We hope this application will help you in your management work and make accurate business decisions.
             </div>
           </div>
-          <button className={clsx([style.login__btn, style.content__btn])}>Get Started!</button>
+          <button className={clsx([style.login__btn, style.content__btn])} onClick={() => router.push('/login')}>
+            Get Started!
+          </button>
         </div>
       </div>
     </div>

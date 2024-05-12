@@ -8,18 +8,14 @@
         border-bottom: 1px solid #e5e5e5;
         display: flex;
         align-items: center;
-        justify-content: end;
-
-
-
-
+        justify-content: flex-end;
     }
 
     .second {
         display: flex;
         min-height: 90vh;
         width: 100%;
-        overflow-x: hidden;
+        overflow: hidden;
 
         .image {
             height: 100%;
