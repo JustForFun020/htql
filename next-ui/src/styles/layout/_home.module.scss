@@ -1,0 +1,14 @@
+.home__provider {
+    .primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .username {
+            margin-top: 12px;
+            opacity: 0.6;
+            font-size: 18px;
+        }
+    }
+}
