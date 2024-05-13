@@ -9,11 +9,7 @@ interface IHomeProps extends PropsFromRedux {}
 
 function Home(props: IHomeProps) {
   const { user } = props;
-
-  useEffect(() => {
-    console.log(user);
-  }, []);
-
+  
   return (
     <div>
       <h1>Welcome to Home</h1>
