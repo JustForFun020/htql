@@ -1,20 +1,40 @@
 'use client';
 
-import React from 'react';
+import React, { use, useContext, useEffect, useState } from 'react';
 import { Button, Col, Divider, Form, Input, Row } from 'antd';
 import style from '@/styles/main.module.scss';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
+import { IUser } from '@/utils/interface';
+import { UserContext } from '@/context/_userContext';
+import { AppDispatch, RootState } from '@/redux/store';
+import { setUser } from '@/redux/user/reducer';
+import { ConnectedProps, connect } from 'react-redux';
 
-type LoginProps = {
+type LoginInputProps = {
   username: string;
   password: string;
 };
 
-function Login() {
+interface LoginProps extends PropsFromRedux {}
+
+function Login(props: LoginProps) {
+  const [user, setUser] = useState<IUser>({} as IUser);
+
+  const { saveUser } = props;
+
   const [form] = Form.useForm();
 
-  const onFinish = (values: LoginProps) => {
-    console.log(values);
+  const router = useRouter();
+
+  const onFinish = (values: LoginInputProps) => {
+    saveUser(user);
+    router.push('/home');
+  };
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -33,7 +53,7 @@ function Login() {
               },
             ]}
           >
-            <Input name='username' />
+            <Input name='username' onChange={onInputChange} />
           </Form.Item>
           <Form.Item
             label='Password'
@@ -58,4 +78,19 @@ function Login() {
   );
 }
 
-export default Login;
+const mapStateToProps = (state: RootState) => {
+  return {
+    user: state.userReducer.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    saveUser: (user: IUser) => dispatch(setUser(user)),
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(Login);
