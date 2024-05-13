@@ -8,6 +8,8 @@ import {
   ApartmentOutlined,
   BarsOutlined,
 } from '@ant-design/icons';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -29,32 +31,56 @@ const MenuComponent = () => {
   }
 
   const items: MenuItem[] = [
-    getItem(<Tooltip title='Home'>Home</Tooltip>, 'home', <HomeOutlined />, undefined, 'item'),
     getItem(
-      <Tooltip title='Product catalog management'>Catalog management</Tooltip>,
-      'catalog',
+      <Tooltip title='Home'>
+        <Link href='/home'>Home</Link>
+      </Tooltip>,
+      '/home',
+      <HomeOutlined />,
+      undefined,
+      'item',
+    ),
+    getItem(
+      <Tooltip title='Product catalog management'>
+        <Link href='catalog-management'>Catalog management</Link>
+      </Tooltip>,
+      '/catalog-management',
       <BarsOutlined />,
       undefined,
       'item',
     ),
     getItem(
-      <Tooltip title='Sales Manager'>Sales Manager</Tooltip>,
-      'sales',
+      <Tooltip title='Sales Management'>
+        <Link href='sales-management'>Sales Management</Link>
+      </Tooltip>,
+      '/sales-management',
       <DeliveredProcedureOutlined />,
       undefined,
       'item',
     ),
-    getItem(<Tooltip title='Reports'>Reports</Tooltip>, 'reports', <AreaChartOutlined />, undefined, 'item'),
     getItem(
-      <Tooltip title='Warehouse Management'>Warehouse Management</Tooltip>,
-      'warehouse',
+      <Tooltip title='Reports'>
+        <Link href='report'>Reports</Link>
+      </Tooltip>,
+      '/report',
+      <AreaChartOutlined />,
+      undefined,
+      'item',
+    ),
+    getItem(
+      <Tooltip title='Warehouse Management'>
+        <Link href='warehouse-management'>Warehouse Management</Link>
+      </Tooltip>,
+      '/warehouse-management',
       <ApartmentOutlined />,
       undefined,
       'item',
     ),
   ];
 
-  return <Menu items={items} defaultSelectedKeys={['home']} theme='dark' />;
+  const pathName = usePathname() ?? '/home';
+
+  return <Menu items={items} defaultSelectedKeys={['home']} theme='dark' selectedKeys={[pathName]} />;
 };
 
 export default MenuComponent;
