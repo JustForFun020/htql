@@ -10,4 +10,8 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     @include scrollbar();
+
+    a {
+        color: rgba($color: #ffffff, $alpha: 0.8)
+    }
 }

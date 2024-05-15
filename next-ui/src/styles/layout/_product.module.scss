@@ -1,0 +1,25 @@
+.product__provider {
+    padding: 20px 50px;
+    background-color: map-get($bgr-color, 'black-1');
+    min-height: 100vh;
+
+    .space {
+        height: 100%;
+        background-color: map-get($bgr-color, 'white-1');
+    }
+
+    .second {
+        .product_info {
+            span {
+                font-size: 24px;
+                font-weight: 600;
+                color: map-get($text-color, 'white');
+            }
+
+            p {
+                font-size: 20px;
+                color: map-get($text-color, 'white-1');
+            }
+        }
+    }
+}

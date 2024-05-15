@@ -5,7 +5,7 @@ import { Button, Col, Divider, Form, Input, Row } from 'antd';
 import style from '@/styles/main.module.scss';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
-import { IUser } from '@/utils/interface';
+import { IUser } from '@/utils/interface/user';
 import { UserContext } from '@/context/_userContext';
 import { AppDispatch, RootState } from '@/redux/store';
 import { setUser } from '@/redux/user/reducer';

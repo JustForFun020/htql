@@ -1,4 +1,4 @@
-import { IUser } from "@/utils/interface";
+import { IUser } from "@/utils/interface/user";
 import { createContext } from "react";
 
 interface IUserContext extends IUser {

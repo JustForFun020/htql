@@ -41,46 +41,131 @@ const MenuComponent = () => {
       'item',
     ),
     getItem(
-      <Tooltip title='Product catalog management'>
-        <Link href='catalog-management'>Catalog management</Link>
-      </Tooltip>,
+      <Tooltip title='Product catalog management'>Catalog management</Tooltip>,
       '/catalog-management',
       <BarsOutlined />,
-      undefined,
+      [
+        getItem(
+          <Tooltip title='Product Classification'>
+            <Link href='/catalog-management/product-handling'>Product Handling</Link>
+          </Tooltip>,
+          '/catalog-management/product-handling',
+          undefined,
+          undefined,
+          'item',
+        ),
+        getItem(
+          <Tooltip title='Product Classification'>
+            <Link href='/catalog-management/product-classification'>Product Classification</Link>
+          </Tooltip>,
+          '/catalog-management/product-classification',
+          undefined,
+          undefined,
+          'item',
+        ),
+      ],
       'item',
     ),
     getItem(
-      <Tooltip title='Sales Management'>
-        <Link href='sales-management'>Sales Management</Link>
-      </Tooltip>,
+      <Tooltip title='Sales Management'>Sales Management</Tooltip>,
       '/sales-management',
       <DeliveredProcedureOutlined />,
-      undefined,
+      [
+        getItem(
+          <Tooltip title='Create Invoice'>
+            <Link href='/sales-management/create-invoice'>Create Invoice</Link>
+          </Tooltip>,
+          '/sales-management/create-invoice',
+          undefined,
+          undefined,
+          'item',
+        ),
+        getItem(
+          <Tooltip title='Bill Payment'>
+            <Link href='/sales-management/bill-payment'>Bill Payment</Link>
+          </Tooltip>,
+          '/sales-management/bill-payment',
+          undefined,
+          undefined,
+          'item',
+        ),
+      ],
       'item',
     ),
     getItem(
-      <Tooltip title='Reports'>
-        <Link href='report'>Reports</Link>
-      </Tooltip>,
+      <Tooltip title='Reports'>Reports</Tooltip>,
       '/report',
       <AreaChartOutlined />,
-      undefined,
+      [
+        getItem(
+          <Tooltip title='Inventory Product'>
+            <Link href='/report/inventory-product'>Inventory Product</Link>
+          </Tooltip>,
+          '/report/inventory-product',
+          undefined,
+          undefined,
+          'item',
+        ),
+        getItem(
+          <Tooltip title='Revenue'>
+            <Link href='/report/revenue'>Revenue</Link>
+          </Tooltip>,
+          '/report/revenue',
+          undefined,
+          undefined,
+          'item',
+        ),
+        getItem(
+          <Tooltip title='Supplier Statistics'>
+            <Link href='/report/supplier-statistics'>Supplier Statistics</Link>
+          </Tooltip>,
+          '/report/supplier-statistics',
+          undefined,
+          undefined,
+          'item',
+        ),
+      ],
       'item',
     ),
     getItem(
-      <Tooltip title='Warehouse Management'>
-        <Link href='warehouse-management'>Warehouse Management</Link>
-      </Tooltip>,
+      <Tooltip title='Warehouse Management'>Warehouse Management</Tooltip>,
       '/warehouse-management',
       <ApartmentOutlined />,
-      undefined,
+      [
+        getItem(
+          <Tooltip title='Import Goods'>
+            <Link href='/warehouse-management/import-goods'>Import Goods</Link>
+          </Tooltip>,
+          '/warehouse-management/import-goods',
+          undefined,
+          undefined,
+          'item',
+        ),
+        getItem(
+          <Tooltip title='Product Quantity'>
+            <Link href='/warehouse-management/product-quantity'>Product Quantity</Link>
+          </Tooltip>,
+          '/warehouse-management/product-quantity',
+          undefined,
+          undefined,
+          'item',
+        ),
+      ],
       'item',
     ),
   ];
 
   const pathName = usePathname() ?? '/home';
 
-  return <Menu items={items} defaultSelectedKeys={['home']} theme='dark' selectedKeys={[pathName]} />;
+  return (
+    <Menu
+      items={items}
+      defaultSelectedKeys={['home']}
+      theme='dark'
+      selectedKeys={[pathName]}
+      triggerSubMenuAction='click'
+    />
+  );
 };
 
 export default MenuComponent;

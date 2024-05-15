@@ -1,16 +1,20 @@
-FROM maven:3.8.5-openjdk-11 AS build
+# Stage 1: Build the application
+FROM maven:3.8.5-openjdk-17 AS build
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY pom.xml .
 
-RUN mvn clean package
+COPY src ./src
 
-FROM adoptopenjdk/openjdk11:alpine-jre
+RUN mvn clean package -DskipTests
 
-WORKDIR /app
+# Stage 2: Create the final image
+FROM openjdk:17-jdk-alpine
 
-COPY --from=build /usr/src/app/target/backend-0.0.1-SNAPSHOT.jar /app/app.jar
+WORKDIR /opt/myapp
+
+COPY --from=build /usr/src/app/target/BookStoreServer-0.0.1-SNAPSHOT.jar ./app.jar
 
 EXPOSE 8080
 

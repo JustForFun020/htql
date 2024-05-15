@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { UserContext } from './_userContext';
-import { IUser } from '@/utils/interface';
+import { IUser } from '@/utils/interface/user';
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser>({ username: '' });
