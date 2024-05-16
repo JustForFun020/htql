@@ -1,3 +1,19 @@
 @import 'root.module';
 @import 'home.module';
 @import 'product.module';
+@import 'product-handling.module';
+@import 'prod-classification.module';
+
+.title {
+    text-align: center;
+
+    h3 {
+        font-size: 30px;
+    }
+
+    i {
+        font-size: 18px;
+        color: map-get($text-color, 'blue-1');
+    }
+
+}
