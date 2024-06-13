@@ -3,17 +3,23 @@
 @import 'product.module';
 @import 'product-handling.module';
 @import 'prod-classification.module';
+@import 'report.module';
+@import 'invoice.module';
+@import 'warehouse.module';
 
 .title {
     text-align: center;
+    width: 50%;
+    margin: auto;
 
     h3 {
         font-size: 30px;
+        margin-bottom: 8px;
     }
 
     i {
         font-size: 18px;
-        color: map-get($text-color, 'blue-1');
+        color: map-get($text-color, 'gray-1');
     }
 
 }

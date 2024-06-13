@@ -1,14 +1,32 @@
 .home__provider {
+    min-height: 100vh;
+    padding: 50px;
+
+
     .primary {
         display: flex;
-        align-items: center;
-        justify-content: center;
         flex-direction: column;
+        align-items: center;
+    }
+}
 
-        .username {
-            margin-top: 12px;
-            opacity: 0.6;
-            font-size: 18px;
-        }
+.box {
+    border-radius: 10px;
+    padding: 20px;
+    width: 500px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    margin-bottom: 50px;
+
+    &__title {
+        letter-spacing: 1.2px;
+        border-bottom: 1px solid map-get($border-color, 'gray-1');
+        padding-bottom: 8px;
+        font-size: 20px;
+    }
+
+    .list__info {
+        font-size: 18px;
+        letter-spacing: 1px;
+        line-height: 1.8;
     }
 }

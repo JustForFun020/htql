@@ -1,7 +1,7 @@
 'use client';
 
 import React, { use, useContext, useEffect, useState } from 'react';
-import { Button, Col, Divider, Form, Input, Row } from 'antd';
+import { Button, Col, Divider, Form, Input, Row, message } from 'antd';
 import style from '@/styles/main.module.scss';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
@@ -10,16 +10,21 @@ import { UserContext } from '@/context/_userContext';
 import { AppDispatch, RootState } from '@/redux/store';
 import { setUser } from '@/redux/user/reducer';
 import { ConnectedProps, connect } from 'react-redux';
+import { useLoginMutation } from '@/redux/action/javaUserApi';
+import { useLazyFindUserByEmailQuery } from '@/redux/action/userApi';
 
 type LoginInputProps = {
-  username: string;
-  password: string;
+  email: string;
+  mat_khau: string;
 };
 
 interface LoginProps extends PropsFromRedux {}
 
 function Login(props: LoginProps) {
-  const [user, setUser] = useState<IUser>({} as IUser);
+  const [userLoginResponse, setUserLoginResponse] = useState<LoginInputProps>({} as LoginInputProps);
+
+  const [login, { isLoading }] = useLoginMutation();
+  const [findUserByEmail] = useLazyFindUserByEmailQuery();
 
   const { saveUser } = props;
 
@@ -28,13 +33,35 @@ function Login(props: LoginProps) {
   const router = useRouter();
 
   const onFinish = (values: LoginInputProps) => {
-    saveUser(user);
-    router.push('/home');
+    login(values)
+      .then((res) => {
+        const error = res.error as any;
+        if (error) {
+          message.error(error.data.message);
+        }
+        if (res.data) {
+          const { token } = res.data;
+          localStorage.setItem('token', token);
+          findUserByEmail(userLoginResponse.email)
+            .unwrap()
+            .then((res) => {
+              if (res) {
+                saveUser(res);
+              }
+            });
+          setTimeout(() => {
+            router.push('/home');
+          }, 2000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser((prev) => ({ ...prev, [name]: value }));
+    setUserLoginResponse((prevState) => ({ ...prevState, [name]: value }));
   };
 
   return (
@@ -44,20 +71,24 @@ function Login(props: LoginProps) {
         <Divider />
         <Form form={form} labelAlign='left' labelCol={{ span: 8 }} onFinish={onFinish}>
           <Form.Item
-            label='Username'
-            name='username'
+            label='Email'
+            name='email'
             rules={[
               {
                 required: true,
-                message: 'Please input your username!',
+                message: 'Please input your email!',
+              },
+              {
+                type: 'email',
+                message: 'Please input a valid email!',
               },
             ]}
           >
-            <Input name='username' onChange={onInputChange} />
+            <Input name='email' onChange={onInputChange} />
           </Form.Item>
           <Form.Item
             label='Password'
-            name='password'
+            name='mat_khau'
             rules={[
               {
                 required: true,
@@ -65,10 +96,10 @@ function Login(props: LoginProps) {
               },
             ]}
           >
-            <Input.Password name='password' />
+            <Input.Password name='mat_khau' onChange={onInputChange} />
           </Form.Item>
           <Form.Item style={{ textAlign: 'center', marginTop: 50 }}>
-            <Button htmlType='submit' type='primary'>
+            <Button htmlType='submit' type='primary' loading={isLoading}>
               Login
             </Button>
           </Form.Item>
@@ -80,7 +111,7 @@ function Login(props: LoginProps) {
 
 const mapStateToProps = (state: RootState) => {
   return {
-    user: state.userReducer.user,
+    // user: state.userReducer.user,
   };
 };
 

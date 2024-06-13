@@ -14,4 +14,10 @@
     a {
         color: rgba($color: #ffffff, $alpha: 0.8)
     }
+
+    ul {
+        li {
+            list-style: none;
+        }
+    }
 }

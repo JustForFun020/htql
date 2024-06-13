@@ -1,0 +1,116 @@
+.warehouse__provider {
+    width: 100%;
+    padding: 20px 50px;
+    min-height: 100vh;
+    margin-bottom: 50px;
+}
+
+.create__supplier__provider {
+    min-height: 100vh;
+
+    .create__supplier_content {
+        padding: 20px 50px;
+        margin-top: 50px;
+
+        .content__primary {
+            padding: 20px;
+            border: 1px solid map-get($border-color, 'gray-1');
+
+            &_title {
+                font-size: 30px;
+                font-weight: 600;
+
+            }
+
+            &_btn {
+                button {
+                    height: 48px;
+                    width: 140px;
+                    font-size: 22px;
+                }
+            }
+        }
+
+        .content__secondary {
+            border-left: 1px solid map-get($border-color, 'gray-1');
+            border-bottom: 1px solid map-get($border-color, 'gray-1');
+            border-right: 1px solid map-get($border-color, 'gray-1');
+            padding: 20px 50px;
+        }
+    }
+}
+
+.content_title {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.content__secondary_form {
+    .form {
+        padding: 30px;
+        border: 1px solid map-get($border-color, 'gray-1');
+        border-radius: 10px;
+    }
+}
+
+.preview__info {
+    .supplier_name {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 30px 0;
+        letter-spacing: 1.4px;
+    }
+
+    .supplier_info {
+        li {
+            line-height: 1.8;
+            opacity: 0.8;
+            letter-spacing: 1.2;
+        }
+    }
+}
+
+.product__list {
+    @include scrollbar();
+
+    height: 100%;
+    padding: 0 60px;
+    overflow: hidden;
+    overflow-y: scroll;
+    width: 600px;
+
+    .product__item {}
+
+    .card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 25px 30px;
+        transition: background-color 0.4s ease;
+
+        &:hover {
+            background-color: #1d1e22;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        h3 {
+            margin: 0;
+        }
+
+        .head {
+            font-size: 26px;
+            letter-spacing: 1.4px;
+            margin-bottom: 8px;
+        }
+    }
+}

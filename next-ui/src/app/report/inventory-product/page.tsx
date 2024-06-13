@@ -1,7 +1,10 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
+const InventoryProduct = dynamic(() => import('../../../components/Report/InventoryProduct'), { ssr: false });
+
 const InventoryProductPage = () => {
-  return <div>InventoryProductPage</div>;
+  return <InventoryProduct />;
 };
 
 export default InventoryProductPage;

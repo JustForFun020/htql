@@ -1,0 +1,33 @@
+.sales__space {
+    width: 100%;
+    padding: 20px 50px;
+    min-height: 100vh;
+}
+
+
+.create__invoice__provider {
+    .content {
+
+        .list__product {
+            width: 100%;
+
+
+        }
+
+        .table__product {
+            width: 100%;
+
+            .table__footer {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                width: 100%;
+
+                p {
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+
+}

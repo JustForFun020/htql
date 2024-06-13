@@ -4,6 +4,7 @@ services:
   next-ui:
     depends_on:
       - backend
+      - nestjs
     build:
       context: ./next-ui
       dockerfile: Dockerfile
@@ -20,29 +21,62 @@ services:
         - path: ./next-ui
           target: /app
           action: sync
-        - path: ./next-ui/.env.dev
-          target: /app/.env.dev
-          action: sync
+        - path: ./next-ui/.env
+          target: /app/.env
+          action: rebuild
 
   mysql-db:
     image: mysql:latest
     volumes:
       - code://data/mysql
     ports:
-      - 3308:3306
+      - 3360:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: htql
-    restart: always
 
   backend:
     depends_on:
       - mysql-db
+      - mongo-db
     build:
-      context: ./backend
+      context: ./bookstore-backend
       dockerfile: Dockerfile
     ports:
       - 8080:8080
+
+  mongo-db:
+    image: mongo:latest
+    volumes:
+      - code://data/mongo
+    ports:
+      - 27777:27017
+    environment:
+      MONGO_INITDB_ROOT_DATABASE: htql
+
+  nestjs:
+    build:
+      context: ./nest-be
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo-db
+      - mysql-db
+    ports:
+      - 5000:5000
+    environment:
+      - MONGODB_URI=mongodb://mongo-db:27017/htql
+    develop:
+      watch:
+        - path: ./nest-be/package.json
+          action: rebuild
+        - path: ./nest-be/package-lock.json
+          action: rebuild
+        - path: ./nest-be
+          target: /htql
+          action: sync
+        - path: ./nest-be/.env.dev
+          target: /htql/.env.dev
+          action: sync
 
 volumes:
   code:

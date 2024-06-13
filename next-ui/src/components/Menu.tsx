@@ -46,7 +46,7 @@ const MenuComponent = () => {
       <BarsOutlined />,
       [
         getItem(
-          <Tooltip title='Product Classification'>
+          <Tooltip title='Product Handling'>
             <Link href='/catalog-management/product-handling'>Product Handling</Link>
           </Tooltip>,
           '/catalog-management/product-handling',
@@ -97,6 +97,15 @@ const MenuComponent = () => {
       '/report',
       <AreaChartOutlined />,
       [
+        getItem(
+          <Tooltip title='Overview'>
+            <Link href='/report/overview'>Overview</Link>
+          </Tooltip>,
+          '/report/overview',
+          undefined,
+          undefined,
+          'item',
+        ),
         getItem(
           <Tooltip title='Inventory Product'>
             <Link href='/report/inventory-product'>Inventory Product</Link>

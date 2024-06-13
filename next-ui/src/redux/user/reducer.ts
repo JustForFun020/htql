@@ -1,24 +1,24 @@
-import { IUser } from "@/utils/interface/user";
-import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from '@/utils/interface/user';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface InitState {
-    user: IUser
+  user: IUser;
 }
 
 const initialState: InitState = {
-    user: {} as IUser
-}
+  user: {} as IUser,
+};
 
 const reducer = createSlice({
-    name: 'userReducer',
-    initialState,
-    reducers: {
-        setUser: (state, action) => {
-            state.user = action.payload
-        }
-    }
-})
+  name: 'userReducer',
+  initialState,
+  reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+  },
+});
 
-export const { setUser } = reducer.actions
-const userReducer = reducer.reducer
-export default userReducer
+export const { setUser } = reducer.actions;
+const userReducer = reducer.reducer;
+export default userReducer;

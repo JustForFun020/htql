@@ -8,14 +8,19 @@ import { Button, Divider, Select, Space } from 'antd';
 import style from '@/styles/main.module.scss';
 import clsx from 'clsx';
 import { classification } from '../../../__mock__/classification';
+import { useLazyClassificationCatalogQuery } from '@/redux/action/catalogApi';
 
 const ListProduct = dynamic(() => import('../ListProduct'), { loading: () => <Loading />, ssr: false });
 
 const ProductClassification = () => {
   const [listClassification, setListClassification] = useState<{ criterion: string; name: string }[]>([]);
 
+  const [classificationCatalog, { isLoading, data }] = useLazyClassificationCatalogQuery();
+
   const handleClickFilter = () => {
-    console.log(listClassification);
+    classificationCatalog({
+      listCriteria: listClassification,
+    });
   };
 
   const handleSelectCriterion = (criterion: string, name: string) => {
@@ -35,7 +40,10 @@ const ProductClassification = () => {
     <Space className={clsx(style.prod__classification__provider)} direction='vertical'>
       <div className={clsx(style.title)}>
         <h3>Product Classification</h3>
-        <i>Manager perform product filtering and product classification here</i>
+        <i>
+          View detailed product information and classify items with ease. Organize your inventory efficiently using our
+          comprehensive classification tools.
+        </i>
       </div>
       <Divider />
       <Space style={{ width: '100%' }}>
@@ -58,8 +66,9 @@ const ProductClassification = () => {
         <Button onClick={handleClickFilter} type='primary'>
           Filter
         </Button>
+        <Button onClick={() => setListClassification([])}>Clear</Button>
       </Space>
-      <ListProduct />
+      <ListProduct dataFromProps={!_.isEmpty(listClassification) && data} />
     </Space>
   );
 };

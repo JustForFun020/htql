@@ -1,14 +1,13 @@
 'use client';
 
-import { UserContext } from '@/context/_userContext';
 import { AppDispatch, RootState } from '@/redux/store';
-import { Avatar, Col, List, Row } from 'antd';
-import React, { useContext, useEffect } from 'react';
+import { Avatar, Col, Row } from 'antd';
+import React from 'react';
 import { ConnectedProps, connect } from 'react-redux';
-import { fakeUser } from '../../__mock__/user';
 import { UserOutlined } from '@ant-design/icons';
 import style from '@/styles/main.module.scss';
 import clsx from 'clsx';
+import moment from 'moment';
 
 interface IHomeProps extends PropsFromRedux {}
 
@@ -17,31 +16,27 @@ function Home(props: IHomeProps) {
 
   return (
     <Row className={clsx(style.home__provider)}>
-      <Col span={8} className={clsx(style.primary)}>
-        <Avatar icon={<UserOutlined />} size={64} />
-        <div className={clsx(style.username)}>{fakeUser.username}</div>
+      <Col span={6} className={clsx(style.primary)}>
+        <Avatar size={64} icon={<UserOutlined />} />
+        <h3>ID: {user?.id}</h3>
       </Col>
-      <Col span={16} className={clsx(style.second)}>
-        <List>
-          <List.Item>
-            <h3>Full Name:</h3> <span>{fakeUser.fullName} </span>
-          </List.Item>
-          <List.Item>
-            <h3>Date of Bird:</h3> <span>{fakeUser.dateOfBirth}</span>
-          </List.Item>
-          <List.Item>
-            <h3>Email:</h3> <span>{fakeUser.email}</span>
-          </List.Item>
-          <List.Item>
-            <h3>Address:</h3> <span>{fakeUser.address}</span>
-          </List.Item>
-          <List.Item>
-            <h3>Phone Number:</h3> <span>{fakeUser.phoneNumber}</span>
-          </List.Item>
-          <List.Item>
-            <h3>Position:</h3> <span>{fakeUser.role}</span>
-          </List.Item>
-        </List>
+      <Col span={18} className={clsx(style.secondary)}>
+        <div className={clsx(style.box)}>
+          <h3 className={clsx(style.box__title)}>Base Information</h3>
+          <ul className={clsx(style.list__info)}>
+            <li>User ID: {user?.id}</li>
+            <li>Full Name: {user?.ho_ten}</li>
+            <li>Date Of Birth: {moment(user?.ngay_sinh).format('DD/MM/YYYY')}</li>
+          </ul>
+        </div>
+        <div className={clsx(style.box)}>
+          <h3 className={clsx(style.box__title)}>Contact Information</h3>
+          <ul className={clsx(style.list__info)}>
+            <li>Email: {user?.email}</li>
+            <li>Phone: {user?.so_dien_thoai}</li>
+            <li>Address: {user?.dia_chi}</li>
+          </ul>
+        </div>
       </Col>
     </Row>
   );

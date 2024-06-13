@@ -17,7 +17,10 @@ function ProductHandling() {
     <Space size='middle' direction='vertical' className={clsx(style.product__handling__provider)}>
       <div className={clsx(style.title)}>
         <h3>Product Handling</h3>
-        <i>Manage adding, editing, and deleting products here</i>
+        <i>
+          View detailed product information, and effortlessly add, edit, or delete items. Manage your product catalog
+          with ease using our comprehensive tools
+        </i>
       </div>
       <Divider />
       <Button onClick={() => router.push('product-handling/add-product')} type='primary'>

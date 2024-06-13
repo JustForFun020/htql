@@ -33,7 +33,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/types/app/layout.ts",
-    ".next/types/app/page.ts"
+    ".next/types/app/page.ts",
+    "src/redux/action/*.ts"
   ],
   "exclude": [
     "node_modules"
